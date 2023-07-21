@@ -18,7 +18,7 @@ const About = () => {
                 <div className="card-body">
                   <h4 className="card-title">Subham Dikshit</h4>
                   <p className="card-text">subhamdikshit007@gmail.com</p>
-                  <a href="#" class="btn btn-lg primary__btn">
+                  <a href="https://www.linkedin.com/in/subham-dikshit-b96552253" target="blank" class="btn btn-lg primary__btn">
                     See Profile
                   </a>
                 </div>
