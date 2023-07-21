@@ -57,12 +57,12 @@ export const getSingleTour = async (req, res) => {
 //Get All Tour
 export const getAllTour = async (req, res) => {
    //For pagination
-   // const page = parseInt(req.query.page)
+   const page = parseInt(req.query.page)
 
    //console.log(page)
 
    try {
-      const tours = await Tour.find({}).populate('reviews')
+      const tours = await Tour.find({}).populate('reviews').skip(page * 8).limit(8)
 
       res.status(200).json({ success: true, count: tours.length, message: 'Successfully', data: tours })
    } catch (error) {
@@ -75,17 +75,18 @@ export const getAllTour = async (req, res) => {
 export const getTourBySearch = async (req, res) => {
 
    // hear 'i' means case sensitive 
-   const city = new RegExp(req.query.city, 'i')
-   const distance = parseInt(req.query.distance)
+   const title = new RegExp(req.query.title, 'i')
+   // const distance = parseInt(req.query.distance)
    const maxGroupSize = parseInt(req.query.maxGroupSize)
+
 
    try {
       // gte means greater than equal
-      const tours = await Tour.find({ city, distance: { $gte: 0 }, maxGroupSize: { $gte: maxGroupSize } }).populate('reviews')
+      const tours = await Tour.find({ title, maxGroupSize: { $gte: maxGroupSize } }).populate('reviews')
 
       res.status(200).json({ success: true, message: 'Successfully', data: tours })
    } catch (error) {
-      res.status(404).json({ success: false, message: 'Not Found' })
+      res.status(404).json({ success: false, message: 'Not Found!!!' })
    }
 }
 

@@ -15,12 +15,12 @@ const SearchBar = () => {
     const distance = distanceRef.current.value;
     const maxGroupSize = maxGroupSizeRef.current.value;
 
-    if (location === "" || distance === "" || maxGroupSize === "") {
+    if (location === "" || maxGroupSize === "") {
       return alert("All fields are required!");
     }
 
     const res = await fetch(
-      `${BASE_URL}/tours/search/getTourBySearch?city=${location}&distance=${distance}&maxGroupSize=${maxGroupSize}`
+      `${BASE_URL}/tours/search/getTourBySearch?title=${location}&maxGroupSize=${maxGroupSize}`
     );
 
     if (!res.ok) alert("Something went wrong");
@@ -28,7 +28,7 @@ const SearchBar = () => {
     const result = await res.json();
 
     navigate(
-      `/tours/search?city=${location}&distance=${distance}&maxGroupSize=${maxGroupSize}`,
+      `/tours/search?title=${location}&maxGroupSize=${maxGroupSize}`,
       { state: result.data }
     );
   };
@@ -50,7 +50,7 @@ const SearchBar = () => {
               />
             </div>
           </FormGroup>
-          <FormGroup className="d-flex gap-3 form__group form__group-fast">
+          {/* <FormGroup className="d-flex gap-3 form__group form__group-fast">
             <span>
               <i class="ri-map-pin-time-line"></i>
             </span>
@@ -62,7 +62,7 @@ const SearchBar = () => {
                 ref={distanceRef}
               />
             </div>
-          </FormGroup>
+          </FormGroup> */}
           <FormGroup className="d-flex gap-3 form__group form__group-last">
             <span>
               <i class="ri-group-line"></i>
