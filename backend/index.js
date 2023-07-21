@@ -31,7 +31,14 @@ const connect = async () => {
     console.log("MongoDB connected failed");
   }
 };
-
+// const corsOptions = {
+//   origin: "*",
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200,
+// };
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+  })
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(cookieParser());
@@ -46,3 +53,4 @@ app.listen(port, () => {
   connect();
   console.log("server listening on port", port);
 });
+
